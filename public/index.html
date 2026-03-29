@@ -664,11 +664,11 @@ function showWinAnimation(){
 
 }
 
-const canvas = document.getElementById("confettiCanvas");
-const ctx = canvas.getContext("2d");
+const confettiCanvas = document.getElementById("confettiCanvas");
+const confettiCtx = confettiCanvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+confettiCanvas.width = window.innerWidth;
+confettiCanvas.height = window.innerHeight;
 
 let confetti = [];
 let animation;
@@ -691,14 +691,14 @@ function startConfetti(){
 
 function drawConfetti(){
 
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
 
-    ctx.fillStyle="gold";
+    confettiCtx.fillStyle="gold";
 
     confetti.forEach(c=>{
-        ctx.beginPath();
-        ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
-        ctx.fill();
+        confettiCtx.beginPath();
+confettiCtx.arc(c.x,c.y,c.r,0,Math.PI*2);
+confettiCtx.fill();
 
         c.y += 2;
         if(c.y>canvas.height){
@@ -711,7 +711,7 @@ function drawConfetti(){
 
 function stopConfetti(){
     cancelAnimationFrame(animation);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    confettiCtx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
 }
 
 </script>
