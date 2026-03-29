@@ -13,12 +13,13 @@ app.get("/", (req,res)=>{
     res.sendFile(path.join(__dirname,"public","index.html"));
 });
 
-mongoose.connect(process.env.MONGO_URI,{
-    useNewUrlParser:true,
-    useUnifiedTopology:true
+mongoose.connect(process.env.MONGO_URI)
+.then(()=>{
+    console.log("MongoDB Connected");
 })
-.then(()=>console.log("MongoDB Connected"))
-.catch(err=>console.log(err));
+.catch((err)=>{
+    console.error("MongoDB Connection Error:", err);
+});
 
 /* ------------------ SCHEMAS ------------------ */
 
