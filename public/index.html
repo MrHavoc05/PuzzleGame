@@ -309,6 +309,7 @@ let selected=[];
 let selectedElements=[];
 let skips = 3;
 let freeReveals = 5;
+let ctx;
 
 const circleArea=document.getElementById('circleArea');
 const canvas=document.getElementById('canvas');
@@ -350,7 +351,7 @@ freeReveals = 5;
 document.getElementById("reveal-info").innerText = "5 Free";
 
 fetchNewWord();
-loadLeaderboard();
+
 
 }else{
 alert("Invalid Login");
@@ -400,7 +401,7 @@ const newCanvas=document.getElementById('canvas');
 newCanvas.width=320;
 newCanvas.height=320;
 
-window.ctx=newCanvas.getContext('2d');
+ctx = newCanvas.getContext('2d');
 
 selected=[];
 selectedElements=[];
@@ -679,8 +680,8 @@ function startConfetti(){
 
     for(let i=0;i<150;i++){
         confetti.push({
-            x:Math.random()*canvas.width,
-            y:Math.random()*canvas.height,
+            x:Math.random()*confettiCanvas.width,
+y:Math.random()*confettiCanvas.height,
             r:Math.random()*6+2,
             d:Math.random()*10
         });
@@ -701,7 +702,7 @@ confettiCtx.arc(c.x,c.y,c.r,0,Math.PI*2);
 confettiCtx.fill();
 
         c.y += 2;
-        if(c.y>canvas.height){
+        if(c.y>confettiCanvas.height){
             c.y=0;
         }
     });
