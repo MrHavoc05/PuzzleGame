@@ -324,10 +324,10 @@ canvas.height=320;
 
 async function login(){
 
-const username=document.getElementById('username').value;
-const password=document.getElementById('password').value;
-
 try{
+
+const username = document.getElementById('username').value;
+const password = document.getElementById('password').value;
 
 const res = await fetch('/api/login',{
 method:'POST',
@@ -338,35 +338,36 @@ body:JSON.stringify({username,password})
 const data = await res.json();
 
 if(data.success){
-   // login success
-}else{
-   alert("Invalid login");
-}
 
-}catch(err){
-   alert("Server error. Try again later.");
-}
+userId = data.userId;
+coins = data.coins;
 
-if(data.success){
+document.getElementById('coin-count').innerText = coins;
 
-userId=data.userId;
-coins=data.coins;
+document.getElementById('auth').style.display = "none";
+document.querySelector('.game-container').style.display = "block";
 
-document.getElementById('coin-count').innerText=coins;
-
-document.getElementById('auth').style.display="none";
-document.querySelector('.game-container').style.display="block";
 skips = 3;
 document.getElementById("skip-count").innerText = skips;
 document.querySelector(".skip-btn").disabled = false;
+
 freeReveals = 5;
 document.getElementById("reveal-info").innerText = "5 Free";
 
 fetchNewWord();
-
+loadLeaderboard();
 
 }else{
-alert("Invalid Login");
+
+alert("Invalid login");
+
+}
+
+}catch(err){
+
+console.error(err);
+alert("Server error. Try again.");
+
 }
 
 }
